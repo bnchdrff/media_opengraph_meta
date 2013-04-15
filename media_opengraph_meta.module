@@ -1,0 +1,35 @@
+<?php
+
+/**
+ *
+ * @param (array) images
+ *   array of images for OG:Meta to list as choices
+ * @param (object) $node
+ *   node object for context
+ */
+function media_opengraph_meta_opengraph_meta_imageharvest_alter(&$images, $node) {
+  // survey media fields for thumbies
+  $fields = (array)$node;
+  foreach ($fields as $field) {
+    // ...and the stupid son asks, "Is this a media field?"
+    if (is_array($field) && array_key_exists('und', $field) && array_key_exists(0, $field['und']) && array_key_exists('type', $field['und'][0]) && $field['und'][0]['type'] == 'video') {
+      foreach ($field['und'] as $file) {
+        // file_get_file expects an object
+        $objectified_file = (object)$file;
+        $new_img = array();
+        // they do it like this in media_get_thumbnail_preview
+        if (!file_type_is_enabled($objectified_file->type)) {
+          $objectified_file->type = file_get_type($objectified_file);
+        }
+        $preview = file_view_file($objectified_file, 'preview');
+        $preview['#show_names'] = TRUE;
+        $preview['#add_link'] = $link;
+        $preview['#theme_wrappers'][] = 'media_thumbnail';
+        $new_img['title'] = $preview['#alt'];
+        $new_img['alt'] = $preview['#alt'];
+        $new_img['url'] = $preview['#path'];
+        $images[] = $new_img;
+      }
+    }
+  }
+}

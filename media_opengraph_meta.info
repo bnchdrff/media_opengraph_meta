@@ -1,0 +1,6 @@
+name = Media - Open Graph Meta Fields
+description = Provide og:meta information from media fields
+core = 7.x
+package = Work Dept
+dependencies[] = opengraph_meta
+dependencies[] = media
