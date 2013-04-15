@@ -22,9 +22,6 @@ function media_opengraph_meta_opengraph_meta_imageharvest_alter(&$images, $node)
           $objectified_file->type = file_get_type($objectified_file);
         }
         $preview = file_view_file($objectified_file, 'preview');
-        $preview['#show_names'] = TRUE;
-        $preview['#add_link'] = $link;
-        $preview['#theme_wrappers'][] = 'media_thumbnail';
         $new_img['title'] = $preview['#alt'];
         $new_img['alt'] = $preview['#alt'];
         $new_img['url'] = $preview['#path'];
