@@ -10,6 +10,7 @@ Installation
 ------------
 
 This module requires a patch to the opengraph_meta module:
+
     diff --git a/opengraph_meta.common.inc b/opengraph_meta.common.inc
     index 491e401..8810206 100644
     --- a/opengraph_meta.common.inc
