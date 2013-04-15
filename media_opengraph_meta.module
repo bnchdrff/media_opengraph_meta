@@ -1,6 +1,9 @@
 <?php
 
 /**
+ * Implements (the unimplemented) HOOK_opengraph_meta_imageharvest_alter().
+ *
+ * Appends any available media thumbnails to the list of og:images
  *
  * @param (array) images
  *   array of images for OG:Meta to list as choices
